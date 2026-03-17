@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada de Parentalidade iFood</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #F9F8F6; color: #333; }
+        
+        /* Estilo Suave para Itens Gatilho */
+        .item-gatilho { 
+            background: #FFF9F8; 
+            border: 1px solid #F8D7D4; 
+            color: #444;
+            transition: all 0.2s ease;
+        }
+        .item-gatilho:hover { border-color: #EA1D2C; background: #FFF1F0; }
+        
+        /* Estilo para Itens de Apoio */
+        .item-apoio { 
+            background: #FDFDFD; 
+            border: 1px solid #E5E7EB; 
+            color: #888; 
+        }
+
+        .tag-mimo { color: #EA1D2C; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.05em; }
+        
+        .btn-next { background-color: #EA1D2C; transition: opacity 0.2s; }
+        .btn-next:hover { opacity: 0.9; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-4">
+
+    <div x-data="{ step: 1, total: 6 }" class="relative w-full max-w-2xl bg-white rounded-[2.5rem] shadow-sm overflow-hidden min-h-[700px] flex flex-col border border-gray-100">
+        
+        <div class="px-10 pt-10 pb-4 flex justify-between items-center">
+            <img src="https://logodownload.org/wp-content/uploads/2017/05/ifood-logo-0.png" alt="iFood" class="h-4">
+            <div class="flex space-x-1.5">
+                <template x-for="i in total">
+                    <div class="h-1 w-6 rounded-full transition-all duration-500" 
+                         :class="step >= i ? 'bg-[#EA1D2C]' : 'bg-gray-100'"></div>
+                </template>
+            </div>
+        </div>
+
+        <div class="flex-grow px-10 md:px-14 py-6 overflow-y-auto custom-scrollbar">
+            
+            <div x-show="step === 1" x-transition.opacity class="space-y-6 py-10">
+                <span class="text-[#EA1D2C] font-bold text-xs uppercase tracking-[0.2em]">Welcome</span>
+                <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Olá, <span class="text-[#EA1D2C]">FoodLover!</span></h1>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Parabéns por este momento tão importante! Estamos felizes em te receber no <strong>Programa de Parentalidade</strong>.
+                </p>
+                <p class="text-gray-500">
+                    Abaixo, apresentamos sua trilha. As etapas marcadas como <b>gatilho</b> são fundamentais para a liberação dos seus mimos especiais.
+                </p>
+            </div>
+
+            <template x-if="step >= 2 && step <= 5">
+                <div class="space-y-6">
+                    <header>
+                        <span class="text-[#EA1D2C] font-bold uppercase text-[10px] tracking-widest">Fase 0<span x-text="step-1"></span></span>
+                        <h2 class="text-3xl font-bold text-gray-900" x-text="
+                            step === 2 ? 'Tempo de Acolher' : 
+                            step === 3 ? 'Tempo de Planejar' : 
+                            step === 4 ? 'Tempo de Cuidar' : 'Tempo de Sustentar'"></h2>
+                        <p class="text-gray-400 text-sm mt-1" x-text="
+                            step === 2 ? 'Inscrição até 12 semanas' : 
+                            step === 3 ? '13 semanas até o nascimento' : 
+                            step === 4 ? 'Nascimento até o retorno' : 'Retorno + 6 meses'"></p>
+                    </header>
+
+                    <div class="space-y-3">
+                        <div class="space-y-2.5" x-show="step === 2">
+                            <a href="URL_AQUI" target="_blank" class="block p-4 item-gatilho rounded-2xl">
+                                <span class="tag-mimo uppercase block mb-1">Gatilho Mimo 01 |</span>
+                                <p class="text-sm font-semibold italic italic">🔗 Mapeamento de Saúde (Gestante)</p>
+                            </a>
+                            <div class="p-4 item-gatilho rounded-2xl">
+                                <span class="tag-mimo uppercase block mb-1">Gatilho Mimo 01 |</span>
+                                <p class="text-sm font-semibold italic italic">🤝 Acolhimento Social (Assistente Social)</p>
+                            </div>
+                            <a href="URL_AQUI" target="_blank" class="block p-4 item-gatilho rounded-2xl">
+                                <span class="tag-mimo uppercase block mb-1">Gatilho Mimo 01 |</span>
+                                <p class="text-sm font-semibold italic italic">🔗 Fluxo de Isenção de Copay</p>
+                            </a>
+                            <div class="p-4 item-apoio rounded-2xl">
+                                <p class="text-xs font-medium">📢 Liderança informada sobre inscrição</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5" x-show="step === 3">
+                            <div class="p-4 item-gatilho rounded-2xl">
+                                <span class="tag-mimo uppercase block mb-1">Gatilho Mimo 02 |</span>
+                                <p class="text-sm font-semibold italic italic">📅 Realizar Sessão de Mentoria</p>
+                            </div>
+                            <a href="URL_AQUI" target="_blank" class="block p-4 item-gatilho rounded-2xl">
+                                <span class="tag-mimo uppercase block mb-1">Gatilho Mimo 02 |</span>
+                                <p class="text-sm font-semibold italic italic">🔗 Novo Mapeamento de Saúde</p>
+                            </a>
+                            <div class="p-4 item-apoio rounded-2xl text-xs">📞 Contato recorrente Assistente Social / Time Saúde</div>
+                        </div>
+
+                        <div class="space-y-2.5" x-show="step === 4">
+                            <a href="URL_AQUI" target="_blank" class="block p-4 item-gatilho rounded-2xl">
+                                <span class="tag-mimo uppercase block mb-1">Gatilho Mimo 03 |</span>
+                                <p class="text-sm font-semibold italic italic">🔗 Inclusão no Plano de Saúde / Form. Bebê</p>
+                            </a>
+                            <div class="p-4 item-apoio rounded-2xl text-xs">🔄 Reonboarding e Acolhimento no Retorno</div>
+                        </div>
+
+                        <div class="space-y-2.5" x-show="step === 5">
+                            <a href="URL_AQUI" target="_blank" class="block p-4 item-gatilho rounded-2xl">
+                                <p class="text-sm font-semibold italic italic">🔗 Último Mapeamento (Pais e Gestantes)</p>
+                            </a>
+                            <div class="p-4 item-apoio rounded-2xl text-xs italic italic">👋 Encerramento e Despedida do Programa</div>
+                        </div>
+                    </div>
+
+                    <footer class="pt-6 mt-4 flex space-x-6 border-t border-gray-50">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 rounded-full bg-[#EA1D2C]"></div>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Item Gatilho</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 rounded-full bg-gray-200"></div>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Apoio</span>
+                        </div>
+                    </footer>
+                </div>
+            </template>
+
+            <div x-show="step === 6" x-transition.opacity class="text-center space-y-8 py-6">
+                <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&q=80&w=600" 
+                     class="w-full h-56 object-cover rounded-3xl shadow-sm">
+                <h2 class="text-3xl font-bold text-gray-900 italic italic">#GenteVemPrimeiro</h2>
+                <p class="text-gray-500 max-w-sm mx-auto text-sm leading-relaxed">
+                    Estamos aqui para apoiar você nessa jornada lado a lado. Qualquer dúvida, conte conosco!
+                </p>
+            </div>
+        </div>
+
+        <div class="p-10 flex justify-between items-center bg-white border-t border-gray-50">
+            <button @click="step > 1 ? step-- : null" 
+                    class="text-gray-400 font-bold text-xs tracking-widest uppercase hover:text-gray-900 transition disabled:opacity-0"
+                    :disabled="step === 1">Anterior</button>
+            
+            <button @click="step < total ? step++ : step = 1" 
+                    class="btn-next text-white px-10 py-3.5 rounded-full font-bold text-xs tracking-[0.15em] uppercase shadow-lg shadow-red-100">
+                <span x-text="step === total ? 'Recomeçar' : 'Continuar'"></span>
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
